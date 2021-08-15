@@ -1,39 +1,16 @@
-const colors = [
-    '#FFFFFF',
-    '#2196F3',
-    '#4CAF50',
-    '#FF9800',
-    '#009688',
-    '#795548',
-];
+// Task 1
 
-const refs = {
-    body: document.body,
-    btnStart: document.querySelector('button[data-action = "start"]'),
-    btnStop: document.querySelector('button[data-action = "stop"]'),
-}
-
-const INTERVAL_DELAY = 1000;
-let intervalId = null;
-
-refs.btnStart.addEventListener('click', changeColor);
-refs.btnStop.addEventListener('click', onBtnStop);
-
-const randomIntegerFromInterval = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1) + min);
+const delay = ms => {
+    return new Promise((resolve) => {
+        setTimeout(() => { resolve(ms) }, ms);
+    });
 };
 
-function changeColor() {
-    intervalId = setInterval(() => {
-        refs.body.style.backgroundColor = colors[randomIntegerFromInterval(0, colors.length - 1)];
-    }, INTERVAL_DELAY);
-    refs.btnStart.disabled = true;
-    refs.btnStart.classList.add("disabled");
+const logger = time => console.log(`Resolved after ${time}ms`);
 
-};
+// Вызовы функции для проверки
+delay(2000).then(logger); // Resolved after 2000ms
+delay(1000).then(logger); // Resolved after 1000ms
+delay(1500).then(logger); // Resolved after 1500ms
 
-function onBtnStop() {
-    clearInterval(intervalId);
-    refs.btnStart.disabled = false;
-    refs.btnStart.classList.remove("disabled");
-}
+// Task 2
